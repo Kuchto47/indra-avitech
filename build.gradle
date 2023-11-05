@@ -1,0 +1,38 @@
+plugins {
+    id "java"
+    id "application"
+}
+
+ext {
+    javaMainClass = "sk.avitech.Main"
+}
+
+application {
+    mainClassName = javaMainClass
+}
+
+run {
+    args("Adam")
+}
+
+group = 'sk.avitech'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "com.opencsv:opencsv:4.1"
+    testImplementation platform("org.junit:junit-bom:${junit_version}")
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+/*
+tasks.register("run") {
+    run()
+}*/
