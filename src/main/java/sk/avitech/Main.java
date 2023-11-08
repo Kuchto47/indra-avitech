@@ -13,10 +13,13 @@ public class Main {
     public static void main(String[] args) {
         CommandsService.validateInputArguments(args);
 
+        var ownerName = args[0];
+        var csvFilePath = args[1];
+
         try {
-            var csvFile = CsvReaderService.readCsvFile(Path.of("./csvFile/csv.csv"));
+            var csvFile = CsvReaderService.readCsvFile(Path.of(csvFilePath));
             var cabinet = new Cabinet(CsvParserService.getWalletsFromCsvLines(csvFile));
-            var wallet = cabinet.getWalletOfOwner(args[0]);
+            var wallet = cabinet.getWalletOfOwner(ownerName);
             if (wallet == null) {
                 System.out.println("WARN: Wallet of supplied user couldn't be found in the wallets cabinet");
             } else {
