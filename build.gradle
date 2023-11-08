@@ -29,7 +29,10 @@ jar {
 }
 
 run {
-    args("Adam", "./csvFile/csv.csv")
+    args(
+        "Adam",
+        "./csvFile/csv.csv"
+    )
 }
 
 group = 'sk.avitech'
