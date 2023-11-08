@@ -1,6 +1,13 @@
 plugins {
     id "java"
+    id "java-library"
     id "application"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 ext {
@@ -8,7 +15,13 @@ ext {
 }
 
 application {
-    mainClassName = javaMainClass
+    mainClass = javaMainClass
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': application.mainClass
+    }
 }
 
 run {
@@ -23,7 +36,7 @@ repositories {
 }
 
 dependencies {
-    implementation "com.opencsv:opencsv:4.1"
+    implementation "com.opencsv:opencsv:${opencsv_version}"
     testImplementation platform("org.junit:junit-bom:${junit_version}")
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
@@ -31,8 +44,3 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-/*
-tasks.register("run") {
-    run()
-}*/

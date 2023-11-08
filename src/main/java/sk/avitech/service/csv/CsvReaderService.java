@@ -4,6 +4,7 @@ import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import com.opencsv.exceptions.CsvException;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -12,7 +13,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class CsvReaderService {
-    public static List<String[]> readCsvFile(Path path, Character separator) throws IOException {
+    public static List<String[]> readCsvFile(Path path, Character separator) throws IOException, CsvException {
         try (Reader reader = Files.newBufferedReader(path)) {
             CSVParser parser = new CSVParserBuilder()
                     .withSeparator(separator)
@@ -28,7 +29,7 @@ public class CsvReaderService {
         }
     }
 
-    public static List<String[]> readCsvFile(Path path) throws IOException {
+    public static List<String[]> readCsvFile(Path path) throws IOException, CsvException {
         return readCsvFile(path, ';');
     }
 }

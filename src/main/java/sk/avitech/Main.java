@@ -1,5 +1,6 @@
 package sk.avitech;
 
+import com.opencsv.exceptions.CsvException;
 import sk.avitech.model.Cabinet;
 import sk.avitech.service.CommandsService;
 import sk.avitech.service.csv.CsvParserService;
@@ -23,6 +24,8 @@ public class Main {
             }
         } catch (IOException e) {
             System.err.println("Couldn't read CSV file on expected path");
+        } catch (CsvException e) {
+            System.err.println("Couldn't read CSV file's content");
         }
     }
 }

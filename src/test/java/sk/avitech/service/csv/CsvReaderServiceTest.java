@@ -1,15 +1,17 @@
 package sk.avitech.service.csv;
 
+import com.opencsv.exceptions.CsvException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CsvReaderServiceTest {
     @Test
-    public void test() throws IOException {
+    public void readsCorrectCsv() throws IOException, CsvException {
         var csvFile = CsvReaderService.readCsvFile(Path.of("./src/test/resources/testCsv.csv"));
 
         assertEquals(3, csvFile.size());
@@ -31,5 +33,12 @@ public class CsvReaderServiceTest {
         assertEquals("Jakub", thirdLine[0]);
         assertEquals("500", thirdLine[1]);
         assertEquals("1m", thirdLine[2]);
+    }
+    @Test
+    public void throwsIOExceptionForIncorrectPath() {
+        assertThrows(
+                IOException.class,
+                () -> CsvReaderService.readCsvFile(Path.of("./src/test/resources/testCsv2.csv"))
+        );
     }
 }
